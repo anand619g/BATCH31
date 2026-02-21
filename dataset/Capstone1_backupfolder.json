@@ -1,0 +1,35 @@
+{
+	"name": "Capstone1_backupfolder",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_blob",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"name": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@concat(dataset().name,'_',formatDateTime(utcNow(),'yyyyMMDD'),'.csv')",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@concat('root/Capstone1/daily_backup/',dataset().name)",
+					"type": "Expression"
+				},
+				"container": "ext-metastore"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
